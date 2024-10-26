@@ -27,7 +27,7 @@ int main(){
 	Pet animal5("Deer", "Bambi", 10);
 	list.appendNode(animal5);
 	
-	cout << "\n\nNow printing out the pickles:\n\n";
+	cout << "\n\nNow printing out the pets in our clinic:\n\n";
 	list.displayList();
 
 }
