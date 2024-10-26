@@ -11,7 +11,7 @@ int main(){
 	char response;
 
 //ADD SOME animals
-	cout << "\n\nAdding the current animals to the linked list!\n\n";
+	cout << "\n\nAdding the current animals to inventory!\n\n";
 	Pet animal1("Dog", "Dolly", 8);
 	list.appendNode(animal1);
 	
