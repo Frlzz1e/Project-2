@@ -88,7 +88,7 @@ void LinkedList<T>::deleteNode(int num)
 	current = head;
 	while(i<num){
 		current = current->next;
-		i++
+		i++;
 	}
 
 	if(current->next == nullptr){

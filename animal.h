@@ -28,7 +28,16 @@ class Pet
 			this->name = n;
 			this->age = a;
 		}
-		
+
+//OVERLOADED << OPERATOR to display the pickle with cout <<
+		friend ostream & operator << (ostream & os, Pet p)
+		{
+			os << "\nAnimal Type: \t" << p.type;
+			os << "\nAnimal Name: \t" << p.name;
+			os << "\nAnimal Age: \t" << p.age;
+			return os;
+		}
+
 };
 
 #endif
