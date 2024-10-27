@@ -10,6 +10,8 @@
 #ifndef ANIMAL_H
 #define ANIMAL_H
 
+#include <iostream>
+
 class Pet
 {
 	private:
@@ -17,7 +19,6 @@ class Pet
 		string name;
 		int age;
 		double balance;
-		
 		
 	public:
 		//CONSTRUCTORS
@@ -29,7 +30,6 @@ class Pet
 			this->age = a;
 		}
 
-//OVERLOADED << OPERATOR to display the pickle with cout <<
 		friend ostream & operator << (ostream & os, Pet p)
 		{
 			os << "\nAnimal Type: \t" << p.type;
@@ -37,6 +37,12 @@ class Pet
 			os << "\nAnimal Age: \t" << p.age;
 			return os;
 		}
+
+		// Getter for age (used for sorting)
+    	int getAge() 
+		{
+       	 	return age;
+    	}
 
 };
 

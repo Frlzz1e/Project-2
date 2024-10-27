@@ -12,6 +12,8 @@
 #define LinkedList_H
 
 #include <iostream>
+#include "ListNode.h"
+#include "animal.h"
 using namespace std;
 
 
@@ -19,16 +21,8 @@ template <typename T>
 class LinkedList
 {
 	private:
-		struct ListNode
-		{
-			//STRUCTURE MEMBERS NEED TO BE ADDED HERE
-			T val;
-			struct ListNode *next;
-			
-		}; 
-
-		ListNode *head;	
-		ListNode *tail;		
+		ListNode<T>* head;  // Pointer to the head of the list
+    	ListNode<T>* tail;  // Pointer to the tail of the list	
 
 	public:
 		LinkedList()
@@ -46,102 +40,99 @@ class LinkedList
 template <typename T>
 void LinkedList<T>::appendNode(T value)
 {
-	ListNode *newNode;
+	// Create a new node
+    ListNode<T>* newNode = new ListNode<T>(value);
 
-	newNode = new ListNode;
-	newNode->val = value;
-	newNode->next = NULL;
-
-	// If there are no nodes in the list make newNode the first node.
-	if (!head ) 
+    // If there are no nodes in the list, set newNode as the head and tail
+    if (!head) 
 	{
-		head = newNode;
-		tail = newNode;
-	}
-	else  // Otherwise, insert newNode at end.
+        head = newNode;
+        tail = newNode;
+    }
+	else 
 	{
-		
-		tail->next = newNode;
-		tail = newNode;
-	}
+        // Otherwise, link the newNode to the end of the list
+        tail->setNextPtr(newNode);
+        tail = newNode;
+    }
 }
 
 template <typename T>
 void LinkedList<T>::deleteNode(int num)
 {
-	ListNode *temp;
-	ListNode *current;
-	int i = 0;
+	if (head == nullptr || num < 0) 
+	{
+        cout << "Invalid position" << endl;
+        return;
+    }
 
-	if(head == nullptr || num < 0){
-		cout << "invalid position" << endl;
-		return;
-	}
+    ListNode<T>* temp;
+    ListNode<T>* current = head;
 
-	if(num == 0) {
-		temp = head;
-		head = head->next;
-		delete temp;
-		return;
-	}
+    if (num == 0) 
+	{  // Delete the head node
+        temp = head;
+        head = head->getNextPtr();
+        delete temp;
+        if (head == nullptr)
+		{  // Update tail if list is now empty
+            tail = nullptr;
+        }
+        return;
+    }
 
-	current = head;
-	while(i<num){
-		current = current->next;
-		i++;
-	}
+    // Traverse to the node just before the specified position
+    for (int i = 0; i < num - 1 && current->getNextPtr() != nullptr; ++i)
+	{
+        current = current->getNextPtr();
+    }
 
-	if(current->next == nullptr){
-		cout << "Position out of range." << endl;
-		return;
-	}
+    if (current->getNextPtr() == nullptr) 
+	{
+        cout << "Position out of range." << endl;
+        return;
+    }
 
-	temp = current->next;
-	current->next = temp->next;
-	delete temp;
-
+    // Delete the node at the specified position
+    temp = current->getNextPtr();
+    current->setNextPtr(temp->getNextPtr());
+    if (temp == tail) 
+	{  // Update tail if the last node was deleted
+        tail = current;
+    }
+    delete temp;
 }
+
 template <typename T>
 void LinkedList<T>::displayList() const
 {
-	ListNode *nodePtr;
+	ListNode<T>* nodePtr = head;
 
-	if(head != NULL)
+    if (head == nullptr)
 	{
-		// Position nodePtr at the head of the list.
-		nodePtr = head;
+        cout << "\nThere are no nodes in the list.\n";
+        return;
+    }
 
-		while (nodePtr)
-		{
-			cout << nodePtr->val << endl;
-			nodePtr = nodePtr->next;
-		}
-	}
-	else
-		cout << "\nThere are no nodes in the list.\n\n";
+    while (nodePtr != nullptr) 
+	{
+        cout << nodePtr->getData();
+        nodePtr = nodePtr->getNextPtr();
+    }
+    cout << endl;
 };
 
 template <typename T>
 LinkedList<T>::~LinkedList()
 {
-	ListNode *nodePtr;   // To traverse the list
-	ListNode *nextNode;  // To point to the next node
+	ListNode<T>* nodePtr = head;
 
-	// Position nodePtr at the head of the list.
-	nodePtr = head;
-
-	// While nodePtr is not at the end of the list...
-	while (nodePtr != NULL)
+    while (nodePtr != nullptr) 
 	{
-		// Save a pointer to the next node.
-		nextNode = nodePtr->next;
-
-		// Delete the current node.
-		delete nodePtr;
-
-		// Position nodePtr at the next node.
-		nodePtr = nextNode;
-	}
+        ListNode<T>* nextNode = nodePtr->getNextPtr();
+        delete nodePtr;
+        nodePtr = nextNode;
+    }
 };
 
 #endif
