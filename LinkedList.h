@@ -11,6 +11,7 @@
 #ifndef LinkedList_H
 #define LinkedList_H
 
+#include "animal.h"
 #include <iostream>
 using namespace std;
 
@@ -40,6 +41,8 @@ class LinkedList
 		void appendNode(T value);
 		void deleteNode(int position);
 		void displayList() const;
+        void addPet(LinkedList<Pet>* list);
+        void procedure(T value);
 };
 
 //DEFINE ALL OTHER LinkedList class FUNCTIONS BELOW THIS LINE--------------------------------
@@ -142,6 +145,33 @@ LinkedList<T>::~LinkedList()
 		// Position nodePtr at the next node.
 		nodePtr = nextNode;
 	}
+};
+
+template <typename T>
+void LinkedList<T>::addPet(LinkedList<Pet>* list)
+{ 
+string tempType;
+string tempName;
+int tempAge;
+double tempBalance;
+
+cout << "Enter information about the new animal"<<endl;
+cout << "\tType: ";
+cin >> tempType;
+cout << "\n\tName: ";
+cin >> tempName;
+cout << "\n\tAge: ";
+cin >> tempAge;
+
+Pet newPet(tempType, tempName, tempAge);
+list->appendNode(newPet);
+
+};
+
+template <typename T>
+void LinkedList<T>::procedure(T value)
+{
+
 };
 
 #endif
