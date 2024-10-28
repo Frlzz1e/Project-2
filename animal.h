@@ -58,6 +58,7 @@ class Pet
 		
 	public:
 		//CONSTRUCTORS
+		Pet(){};
 	    Pet(string t, string n, int a, FinInfo f)
 		{
 			this->type = t;

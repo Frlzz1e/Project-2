@@ -24,8 +24,12 @@ class LinkedList
 		{
 			//STRUCTURE MEMBERS NEED TO BE ADDED HERE
 			T val;
-			struct ListNode *next;
-			
+			ListNode *next;
+
+            ListNode(T NV){
+                this->val = NV;
+                this->next = NULL;
+            }
 		}; 
 
 		ListNode *head;	
@@ -51,7 +55,7 @@ void LinkedList<T>::appendNode(T value)
 {
 	ListNode *newNode;
 
-	newNode = new ListNode;
+	newNode = new ListNode(value);
 	newNode->val = value;
 	newNode->next = NULL;
 
@@ -153,7 +157,6 @@ void LinkedList<T>::addPet(LinkedList<Pet>* list)
 string tempType;
 string tempName;
 int tempAge;
-double tempBalance;
 
 cout << "Enter information about the new animal"<<endl;
 cout << "\tType: ";
@@ -163,7 +166,8 @@ cin >> tempName;
 cout << "\n\tAge: ";
 cin >> tempAge;
 
-Pet newPet(tempType, tempName, tempAge);
+FinInfo NewObject = FinInfo(0.00, 0.00, 0.00);
+Pet newPet(tempType, tempName, tempAge, NewObject);
 list->appendNode(newPet);
 
 };

@@ -4,8 +4,8 @@
 using namespace std;
 
 
-void FinInfo::setbalance(double givenbalance) {currentBal=givenbalance;} 
-void FinInfo::setpaid(double givenpaid) {Paid=givenpaid;}
+void FinInfo::setbalance(double givenbalance) {currentBal = givenbalance;} 
+void FinInfo::setpaid(double givenpaid) {Paid = givenpaid;}
 void FinInfo::settip(double giventip){tips = giventip;}
 
 double FinInfo::getbalance() {return currentBal;}
