@@ -15,19 +15,21 @@ int main(){
 
 //ADD SOME animals
 	cout << "\n\nAdding the current animals to inventory!\n\n";
-	Pet animal1("Dog", "Dolly", 8);
+    FinInfo object = FinInfo(0.00, 0.00, 0.00);
+
+	Pet animal1("Dog", "Dolly", 8, object);
 	list.appendNode(animal1);
 	
-	Pet animal2("Cat", "Lucy", 4);
+	Pet animal2("Cat", "Lucy", 4, object);
 	list.appendNode(animal2);
 	
-	Pet animal3("Rabbit", "Bob", 2);
+	Pet animal3("Rabbit", "Bob", 2, object);
 	list.appendNode(animal3);
 	
-	Pet animal4("Dragon", "Elliot", 643);
+	Pet animal4("Dragon", "Elliot", 643, object);
 	list.appendNode(animal4);
 	
-	Pet animal5("Deer", "Bambi", 10);
+	Pet animal5("Deer", "Bambi", 10, object);
 	list.appendNode(animal5);
     
 
