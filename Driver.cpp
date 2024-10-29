@@ -20,7 +20,7 @@ int main(){
     int randomDescription = (rand() % 3) + 1;
 
 //ADD SOME animals
-	cout << "\n\nAdding the current animals to inventory!\n\n";
+	cout << "\n\nLoading pets into linked list...";
     FinInfo object = FinInfo(0.00, 0.00, 0.00);
 
 	Pet animal1("Dog", "Dolly", 8, object);
@@ -45,11 +45,11 @@ int main(){
         cout << "1. View the Pets in the Kennel" << endl;
         cout << "2. Add a Pet to the Kennel" << endl;
         cout << "3. Update Pet Info" << endl;
-        cout << "4. Add a procedure" << endl;
+        cout << "4. Pay balance" << endl;
         cout << "5. Leave the Clinc" << endl;
         cin >> menuChoice;
 
-        while (menuChoice < 1 || menuChoice > 4 || cin.fail())
+        while (menuChoice < 1 || menuChoice > 5 || cin.fail())
         {
             if (cin.fail())
             {
@@ -62,7 +62,7 @@ int main(){
                 cout << "1. View the Pets in the Kennel" << endl;
                 cout << "2. Add a Pet to the Kennel" << endl;
                 cout << "3. Update Pet Info" << endl;
-                cout << "4. Add a procedure" << endl;
+                cout << "4. Pay balance" << endl;
                 cout << "5. Leave the Clinc" << endl;
                 cin >> menuChoice;
             }
@@ -73,7 +73,7 @@ int main(){
                 cout << "1. View the Pets in the Kennel" << endl;
                 cout << "2. Add a Pet to the Kennel" << endl;
                 cout << "3. Update Pet Info" << endl;
-                cout << "4. Add a procedure" << endl;
+                cout << "4. Pay balance" << endl;
                 cout << "5. Leave the Clinc" << endl;
                 cin >> menuChoice;
             }

@@ -46,7 +46,6 @@ class LinkedList
 		void deleteNode(int position);
 		void displayList() const;
         void addPet(LinkedList<Pet>* list);
-        void procedure(T value);
 };
 
 //DEFINE ALL OTHER LinkedList class FUNCTIONS BELOW THIS LINE--------------------------------
@@ -178,12 +177,6 @@ cin >> temptip;
 FinInfo NewObject = FinInfo(tempBal, tempPaid, temptip);
 Pet newPet(tempType, tempName, tempAge, NewObject);
 list->appendNode(newPet);
-
-};
-
-template <typename T>
-void LinkedList<T>::procedure(T value)
-{
 
 };
 
