@@ -75,38 +75,48 @@ void LinkedList<T>::appendNode(T value)
 template <typename T>
 void LinkedList<T>::deleteNode(int num)
 {
-	ListNode *temp;
-	ListNode *current;
-	int i = 0;
+	ListNode *nodePtr;       // To traverse the list
+	ListNode *previousNode;  // To point to the previous node
 
-	if(head == nullptr || num < 0){
-		cout << "invalid position" << endl;
+	// If the list is empty, do nothing.
+	if (!head)
 		return;
+
+	// Determine if the first node is the one.
+	if (head->val == num)
+	{
+		nodePtr = head->next;
+		delete head;
+		head = nodePtr;
 	}
+	else
+	{
+		// Initialize nodePtr to head of list
+		nodePtr = head;
 
-	if(num == 0) {
-		temp = head;
-		head = head->next;
-		delete temp;
-		return;
+		// Skip all nodes whose value member is 
+		// not equal to num.
+		while (nodePtr != NULL && nodePtr->value != num)
+		{  
+			previousNode = nodePtr;
+			nodePtr = nodePtr->next;
+		}
+
+		// If nodePtr is not at the end of the list, 
+		// link the previous node to the node after
+		// nodePtr, then delete nodePtr.
+		if (nodePtr)
+		{
+			if(nodePtr == tail)
+			{
+				tail = previousNode;
+			}
+			previousNode->next = nodePtr->next;
+			delete nodePtr;
+		}
 	}
+};
 
-	current = head;
-	while(i<num){
-		current = current->next;
-		i++;
-	}
-
-	if(current->next == nullptr){
-		cout << "Position out of range." << endl;
-		return;
-	}
-
-	temp = current->next;
-	current->next = temp->next;
-	delete temp;
-
-}
 template <typename T>
 void LinkedList<T>::displayList() const
 {

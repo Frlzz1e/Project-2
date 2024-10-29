@@ -16,6 +16,7 @@ int main(){
     srand(time(0));
     int count = 0;
     int choice;
+    int position;
     int menuChoice;
     int randomDescription = (rand() % 3) + 1;
 
@@ -45,11 +46,12 @@ int main(){
         cout << "1. View the Pets in the Kennel" << endl;
         cout << "2. Add a Pet to the Kennel" << endl;
         cout << "3. Update Pet Info" << endl;
-        cout << "4. Pay balance" << endl;
-        cout << "5. Leave the Clinc" << endl;
+        cout << "4. Remove a pet" << endl;
+        cout << "5. Pay balance" << endl;
+        cout << "6. Leave the Clinc" << endl;
         cin >> menuChoice;
 
-        while (menuChoice < 1 || menuChoice > 5 || cin.fail())
+        while (menuChoice < 1 || menuChoice > 6 || cin.fail())
         {
             if (cin.fail())
             {
@@ -57,24 +59,24 @@ int main(){
                 cout << "\nOops! please enter a number" << endl;
                 cin.clear();
                 cin.ignore();
-                cout << "\nOops! you entered an invalid choice! Please enter 1, 2, or 3!" << endl;
-                cout << "\nWelcome to our Veterinary Office! What would you like to do today?" << endl;
+                cout << "\n\nWelcome to our Veterinary Office! What would you like to do today?" << endl;
                 cout << "1. View the Pets in the Kennel" << endl;
                 cout << "2. Add a Pet to the Kennel" << endl;
                 cout << "3. Update Pet Info" << endl;
-                cout << "4. Pay balance" << endl;
-                cout << "5. Leave the Clinc" << endl;
+                cout << "4. Remove a pet" << endl;
+                cout << "5. Pay balance" << endl;
+                cout << "6. Leave the Clinc" << endl;
                 cin >> menuChoice;
             }
             else
             {
-                cout << "\nOops! you entered an invalid choice! Please enter 1, 2, or 3!" << endl;
-                cout << "\nWelcome to our Veterinary Office! What would you like to do today?" << endl;
+                cout << "\n\nWelcome to our Veterinary Office! What would you like to do today?" << endl;
                 cout << "1. View the Pets in the Kennel" << endl;
                 cout << "2. Add a Pet to the Kennel" << endl;
                 cout << "3. Update Pet Info" << endl;
-                cout << "4. Pay balance" << endl;
-                cout << "5. Leave the Clinc" << endl;
+                cout << "4. Remove a pet" << endl;
+                cout << "5. Pay balance" << endl;
+                cout << "6. Leave the Clinc" << endl;
                 cin >> menuChoice;
             }
         }
@@ -92,13 +94,31 @@ int main(){
             cout << "Thank you for adding your new pet." << endl << endl;
             cout << "Here is the new list of pets in our kennel:" <<endl;
             list.displayList();
+
+            break;
         case 3:
 
 
+            break;
+
+
         case 4:
+            cout << "\n\nWhich pet would you like to delete?\n\n";
+            list.displayList();
+            cout << endl;
+            cin >> position;
+
+            list.deleteNode(position);
+
+            break;
 
         case 5:
-            cout << "\n\nHave a great day and thank you for coming.";
+
+        
+        case 6:
+             cout << "\n\nHave a great day and thank you for coming.";
+
+             return 0;
         }
             
     } while (menuChoice != 5);
