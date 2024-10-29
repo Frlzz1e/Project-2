@@ -157,6 +157,9 @@ void LinkedList<T>::addPet(LinkedList<Pet>* list)
 string tempType;
 string tempName;
 int tempAge;
+double tempBal;
+double tempPaid;
+double temptip;
 
 cout << "Enter information about the new animal"<<endl;
 cout << "\tType: ";
@@ -165,8 +168,14 @@ cout << "\n\tName: ";
 cin >> tempName;
 cout << "\n\tAge: ";
 cin >> tempAge;
+cout << "\n\tCurrent Balance: ";
+cin>> tempBal;
+cout << "\n\tAmount already Paid: ";
+cin >> tempPaid;
+cout << "\n\tTip: ";
+cin >> temptip;
 
-FinInfo NewObject = FinInfo(0.00, 0.00, 0.00);
+FinInfo NewObject = FinInfo(tempBal, tempPaid, temptip);
 Pet newPet(tempType, tempName, tempAge, NewObject);
 list->appendNode(newPet);
 
