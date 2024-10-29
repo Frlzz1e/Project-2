@@ -1,9 +1,9 @@
 /*****************************************************************
 	Filename:       LinkedList.h - Class Specification File for 
 				    LinkedList Template Class
-	Date Created:   October 22, 2024
+	Date Created:   10/24/2024
 	Author:         Bernie Friesel
-	Purpose:        LAB 5 - A Singly-Linked List implemented in a
+	Purpose:        A Singly-Linked List implemented in a
 				    LinkedList template class that contains a ListNode
 				    structure variable
 ******************************************************************/

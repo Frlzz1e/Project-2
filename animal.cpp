@@ -1,3 +1,9 @@
+/************************************************************
+	Filename:      animal.cpp
+	Author:        Bernie Friesel and Nathan Lopp
+	Date Created:  10/24/2024
+	Purpose:       Our setters and getters for out financial class
+*************************************************************/
 #include "animal.h"
 #include <iostream>
 

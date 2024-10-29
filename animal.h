@@ -1,10 +1,8 @@
 /************************************************************
-	Filename:      Pickle.h
-	Author:        April R. Crockett
-	Date Created:  2/24/2021
-	Purpose:       Class specification file for a Pickle
-	               which will be used in 
-				   CSC 1310 LAB 5 on Template Linked List
+	Filename:      animal.h
+	Author:        Bernie Friesel and NAthan Lopp
+	Date Created:  10/24/2024
+	Purpose:       The two data classes for our program 2
 *************************************************************/
 
 #ifndef ANIMAL_H
@@ -78,7 +76,6 @@ class Pet
 			os << "\nTips: \t" << p.FinacialObject.gettip();
 			return os;
 		}
-
 };
 
 
