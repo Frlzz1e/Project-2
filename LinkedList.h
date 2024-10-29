@@ -15,26 +15,48 @@
 #include <iostream>
 using namespace std;
 
-
+template <typename T>
+class ListNode 
+{
+    private:
+        T data;    // Stores data of template type T
+        ListNode<T>* next;  // Pointer to the next node in the list
+    public:
+        // Constructor to initialize the node 
+        ListNode(T value, ListNode* nextNode = nullptr) 
+        {
+            data = value;
+            next = nextNode;
+        }
+        // Getter for data
+        T getData()
+        {
+            return data;
+        }
+        // Setter for data
+        void setData(T& value) 
+        {
+            data = value;
+        }
+        // Getter for the next pointer
+        ListNode* getNextPtr()
+        {
+            return next;
+        }
+        // Setter for the next pointer
+        void setNextPtr(ListNode* nextNode) 
+        {
+            next = nextNode;
+        }
+        // Destructor (does not delete attached nodes to allow manual cleanup)
+        ~ListNode() {}
+};
 template <typename T>
 class LinkedList
 {
 	private:
-		struct ListNode
-		{
-			//STRUCTURE MEMBERS NEED TO BE ADDED HERE
-			T val;
-			ListNode *next;
-
-            ListNode(T NV){
-                this->val = NV;
-                this->next = NULL;
-            }
-		}; 
-
-		ListNode *head;	
-		ListNode *tail;		
-
+		ListNode<T>* head;	
+		ListNode<T>* tail;		
 	public:
 		LinkedList()
 		{ 
@@ -52,11 +74,7 @@ class LinkedList
 template <typename T>
 void LinkedList<T>::appendNode(T value)
 {
-	ListNode *newNode;
-
-	newNode = new ListNode(value);
-	newNode->val = value;
-	newNode->next = NULL;
+	ListNode<T>* newNode = new ListNode<T>(value);
 
 	// If there are no nodes in the list make newNode the first node.
 	if (!head ) 
@@ -66,8 +84,7 @@ void LinkedList<T>::appendNode(T value)
 	}
 	else  // Otherwise, insert newNode at end.
 	{
-		
-		tail->next = newNode;
+		tail->setNextPtr(newNode);
 		tail = newNode;
 	}
 }
@@ -75,79 +92,72 @@ void LinkedList<T>::appendNode(T value)
 template <typename T>
 void LinkedList<T>::deleteNode(int num)
 {
-	ListNode *temp;
-	ListNode *current;
-	int i = 0;
+	if (head == nullptr || num < 0) 
+    {
+        cout << "Invalid position" << endl;
+        return;
+    }
 
-	if(head == nullptr || num < 0){
-		cout << "invalid position" << endl;
-		return;
+    ListNode<T>* temp;
+    ListNode<T>* current = head;
+
+    if (num == 0) 
+    {
+        temp = head;
+        head = head->getNextPtr();
+        delete temp;
+        return;
+    }
+
+    int i = 0;
+    while (current && i < num-1) 
+    {
+        current = current->getNextPtr();
+        i++;
+    }
+
+    if (!current || !current->getNextPtr()) 
+    {
+        cout << "Position out of range." << endl;
+        return;
+    }
+
+    temp = current->getNextPtr();
+    current->setNextPtr(temp->getNextPtr());
+    delete temp;
+
+    if (!current->getNextPtr())
+	{
+    	tail = current;
 	}
-
-	if(num == 0) {
-		temp = head;
-		head = head->next;
-		delete temp;
-		return;
-	}
-
-	current = head;
-	while(i<num){
-		current = current->next;
-		i++;
-	}
-
-	if(current->next == nullptr){
-		cout << "Position out of range." << endl;
-		return;
-	}
-
-	temp = current->next;
-	current->next = temp->next;
-	delete temp;
-
 }
+
 template <typename T>
 void LinkedList<T>::displayList() const
 {
-	ListNode *nodePtr;
-
-	if(head != NULL)
-	{
-		// Position nodePtr at the head of the list.
-		nodePtr = head;
-
-		while (nodePtr)
-		{
-			cout << nodePtr->val << endl;
-			nodePtr = nodePtr->next;
-		}
-	}
-	else
-		cout << "\nThere are no nodes in the list.\n\n";
+	if (!head) 
+    {
+        cout << "\nThere are no nodes in the list.\n\n";
+        return;
+    }
+    ListNode<T>* nodePtr = head;
+    while (nodePtr) 
+    {
+        cout << nodePtr->getData() << endl;
+        nodePtr = nodePtr->getNextPtr();
+    }
 };
 
 template <typename T>
 LinkedList<T>::~LinkedList()
 {
-	ListNode *nodePtr;   // To traverse the list
-	ListNode *nextNode;  // To point to the next node
-
-	// Position nodePtr at the head of the list.
-	nodePtr = head;
-
-	// While nodePtr is not at the end of the list...
-	while (nodePtr != NULL)
-	{
-		// Save a pointer to the next node.
-		nextNode = nodePtr->next;
-
-		// Delete the current node.
-		delete nodePtr;
-
-		// Position nodePtr at the next node.
-		nodePtr = nextNode;
-	}
+	ListNode<T>* nodePtr = head;
+    while (nodePtr) 
+    {
+        ListNode<T>* nextNode = nodePtr->getNextPtr();
+        delete nodePtr;
+        nodePtr = nextNode;
+    }
 };
 
 template <typename T>
