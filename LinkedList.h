@@ -191,5 +191,105 @@ Pet newPet(tempType, tempName, tempAge, NewObject);
 list->appendNode(newPet);
 
 };
+template <typename T>
+void LinkedList<T>::sortAscend() 
+{
+    head = mergeSort(head, true);  // Sort in ascending order
+    updateTail();
+}
 
+template <typename T>
+void LinkedList<T>::sortDescend() 
+{
+    head = mergeSort(head, false);  // Sort in descending order
+    updateTail();
+}
+
+template <typename T>
+ListNode<T>* LinkedList<T>::mergeSort(ListNode<T>* node, bool ascending) 
+{
+    if (!node || !node->getNextPtr()) 
+	{
+        return node;  // Base case: return if list is empty or has one node
+    }
+    
+    // Split list into halves
+    ListNode<T>* mid = getMiddle(node);
+    ListNode<T>* rightHalf = mid->getNextPtr();
+    mid->setNextPtr(nullptr);  // Split the list
+    
+    // Recursive sort on each half
+    ListNode<T>* leftSorted = mergeSort(node, ascending);
+    ListNode<T>* rightSorted = mergeSort(rightHalf, ascending);
+    
+    // Merge sorted halves
+    return merge(leftSorted, rightSorted, ascending);
+}
+
+template <typename T>
+ListNode<T>* LinkedList<T>::getMiddle(ListNode<T>* node) 
+{
+    ListNode<T>* leftWalker = node;
+    ListNode<T>* rightWalker = node->getNextPtr();
+    
+    while (rightWalker && rightWalker->getNextPtr())
+	{
+        leftWalker = leftWalker->getNextPtr();
+        rightWalker = rightWalker->getNextPtr()->getNextPtr();
+    }
+    return leftWalker;
+}
+
+template <typename T>
+ListNode<T>* LinkedList<T>::merge(ListNode<T>* left, ListNode<T>* right, bool ascending)
+ {
+    ListNode<T> tempHead;  // Temporary node to simplify the merging process
+    ListNode<T>* mergeTail = &tempHead;
+    
+    while (left && right) 
+	{
+        // Compare nodes based on ascending or descending order
+        if ((ascending && left->getData().age <= right->getData().age) ||
+            (!ascending && left->getData().age > right->getData().age))
+		{
+            mergeTail->setNextPtr(left);
+            left = left->getNextPtr();
+        }
+		else 
+		{
+            mergeTail->setNextPtr(right);
+            right = right->getNextPtr();
+        }
+        mergeTail = mergeTail->getNextPtr();
+    }
+    
+    // Attach remaining nodes
+    if (left) 
+	{
+        mergeTail->setNextPtr(left);
+    } 
+	else 
+	{
+        mergeTail->setNextPtr(right);
+    }
+    
+    return tempHead.getNextPtr();  // Head of the merged list
+}
+
+template <typename T>
+void LinkedList<T>::updateTail()
+{
+    if (!head) 
+	{
+        tail = nullptr;
+        return;
+    }
+    
+    ListNode<T>* node = head;
+    while (node->getNextPtr()) 
+	{
+        node = node->getNextPtr();
+    }
+    tail = node;
+}
 #endif
