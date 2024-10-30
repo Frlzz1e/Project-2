@@ -64,6 +64,9 @@ class Pet
 			this->age = a;
 			this->FinacialObject = f;
 		}
+	
+
+
 
 //OVERLOADED << OPERATOR to display the pet with cout <<
 		friend ostream & operator << (ostream & os, Pet p)

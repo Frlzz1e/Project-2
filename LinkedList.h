@@ -41,6 +41,7 @@ class LinkedList
 			head = NULL; 
 			tail = NULL;
 		}
+
 		~LinkedList();
 		void appendNode(T value);
 		void deleteNode(int position);
@@ -77,13 +78,13 @@ void LinkedList<T>::deleteNode(int num)
 {
 	ListNode *nodePtr;       // To traverse the list
 	ListNode *previousNode;  // To point to the previous node
-
+    int i = 0;
 	// If the list is empty, do nothing.
 	if (!head)
 		return;
 
 	// Determine if the first node is the one.
-	if (head->val == num)
+	if (num == 1)
 	{
 		nodePtr = head->next;
 		delete head;
@@ -96,10 +97,11 @@ void LinkedList<T>::deleteNode(int num)
 
 		// Skip all nodes whose value member is 
 		// not equal to num.
-		while (nodePtr != NULL && nodePtr->value != num)
+		while (nodePtr != NULL && i != num-1)
 		{  
 			previousNode = nodePtr;
 			nodePtr = nodePtr->next;
+            i++;
 		}
 
 		// If nodePtr is not at the end of the list, 
