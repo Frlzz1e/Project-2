@@ -1,6 +1,6 @@
 /************************************************************
 	Filename:      Driver.cpp
-	Author:        Bernie Friesel and NAthan Lopp
+	Author:        Bernie Friesel and Nathan Lopp
 	Date Created:  10/24/2024
 	Purpose:       The driver for our program 2
 *************************************************************/

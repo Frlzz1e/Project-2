@@ -1,6 +1,6 @@
 /************************************************************
 	Filename:      animal.h
-	Author:        Bernie Friesel and NAthan Lopp
+	Author:        Bernie Friesel and Nathan Lopp
 	Date Created:  10/24/2024
 	Purpose:       The two data classes for our program 2
 *************************************************************/
