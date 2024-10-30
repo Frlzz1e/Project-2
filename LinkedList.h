@@ -16,26 +16,25 @@
 using namespace std;
 
 template <typename T>
+struct ListNode 
+{
+    T val;
+    ListNode* next;
+
+    ListNode(T NV)
+	{
+    	val = NV;
+    	next = nullptr;
+	}
+};
+template <typename T>
 class LinkedList
 {
 	private:
-		struct ListNode
-		{
-			//STRUCTURE MEMBERS NEED TO BE ADDED HERE
-			T val;
-			ListNode *next;
-
-            ListNode(T NV){
-                this->val = NV;
-                this->next = NULL;
-            }
-		}; 
-
-		ListNode *head;	
-		ListNode *tail;	
-        ListNode* mergeSort(ListNode* node, bool ascending);
-        ListNode* getMiddle(ListNode* node);
-        ListNode* merge(ListNode* left, ListNode* right, bool ascending);
+		ListNode<T>* head;	
+		ListNode<T>* tail;	
+        ListNode<T>* mergeSort(ListNode<T>* startNode, bool ascending);
+        ListNode<T>* merge(ListNode<T>* leftNode, ListNode<T>* rightNode, bool ascending);
         void updateTail();	
 
 	public:
@@ -58,12 +57,7 @@ class LinkedList
 template <typename T>
 void LinkedList<T>::appendNode(T value)
 {
-	ListNode *newNode;
-
-	newNode = new ListNode(value);
-	newNode->val = value;
-	newNode->next = NULL;
-
+	ListNode<T>* newNode = new ListNode<T>(value);
 	// If there are no nodes in the list make newNode the first node.
 	if (!head ) 
 	{
@@ -81,8 +75,8 @@ void LinkedList<T>::appendNode(T value)
 template <typename T>
 void LinkedList<T>::deleteNode(int num)
 {
-	ListNode *nodePtr;       // To traverse the list
-	ListNode *previousNode;  // To point to the previous node
+	ListNode<T>* nodePtr;       // To traverse the list
+	ListNode<T>* previousNode;  // To point to the previous node
     int i = 0;
 	// If the list is empty, do nothing.
 	if (!head)
@@ -127,7 +121,7 @@ void LinkedList<T>::deleteNode(int num)
 template <typename T>
 void LinkedList<T>::displayList() const
 {
-	ListNode *nodePtr;
+	ListNode<T>* nodePtr;
 
 	if(head != NULL)
 	{
@@ -147,8 +141,8 @@ void LinkedList<T>::displayList() const
 template <typename T>
 LinkedList<T>::~LinkedList()
 {
-	ListNode *nodePtr;   // To traverse the list
-	ListNode *nextNode;  // To point to the next node
+	ListNode<T>* nodePtr;   // To traverse the list
+	ListNode<T>* nextNode;  // To point to the next node
 
 	// Position nodePtr at the head of the list.
 	nodePtr = head;
@@ -210,14 +204,15 @@ void LinkedList<T>::sortDescend() {
 }
 
 template <typename T>
-typename LinkedList<T>::ListNode* LinkedList<T>::mergeSort(ListNode* startNode, bool ascending) {
+ListNode<T>* LinkedList<T>::mergeSort(ListNode<T>* startNode, bool ascending)
+{
     if (!startNode || !startNode->next)
 	{
         return startNode;
 	}
 
-    ListNode* midNode = startNode;
-    ListNode* endNode = startNode->next;
+    ListNode<T>* midNode = startNode;
+    ListNode<T>* endNode = startNode->next;
 
     while (endNode && endNode->next) 
 	{
@@ -225,19 +220,19 @@ typename LinkedList<T>::ListNode* LinkedList<T>::mergeSort(ListNode* startNode, 
         endNode = endNode->next->next;
     }
 
-    ListNode* rightHalfStart = midNode->next;
+    ListNode<T>* rightHalfStart = midNode->next;
     midNode->next = nullptr;
 
-    ListNode* leftSorted = mergeSort(startNode, ascending);
-    ListNode* rightSorted = mergeSort(rightHalfStart, ascending);
+    ListNode<T>* leftSorted = mergeSort(startNode, ascending);
+    ListNode<T>* rightSorted = mergeSort(rightHalfStart, ascending);
 
     return merge(leftSorted, rightSorted, ascending);
 }
 
 template <typename T>
-typename LinkedList<T>::ListNode* LinkedList<T>::merge(ListNode* leftNode, ListNode* rightNode, bool ascending) {
-    ListNode tempHead(0);
-    ListNode* mergedTail = &tempHead;
+ListNode<T>* LinkedList<T>::merge(ListNode<T>* leftNode, ListNode<T>* rightNode, bool ascending) {
+    ListNode<T> tempHead(0);
+    ListNode<T>* mergedTail = &tempHead;
 
     while (leftNode && rightNode) {
         if ((ascending && leftNode->val.age <= rightNode->val.age) ||
@@ -274,7 +269,7 @@ void LinkedList<T>::updateTail()
         return;
     }
 
-    ListNode* currentNode = head;
+    ListNode<T>* currentNode = head;
     while (currentNode->next)
 	{
         currentNode = currentNode->next;
