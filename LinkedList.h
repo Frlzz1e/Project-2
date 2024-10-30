@@ -33,9 +33,9 @@ class LinkedList
 
 		ListNode *head;	
 		ListNode *tail;	
-        ListNode<T>* mergeSort(ListNode<T>* node, bool ascending);
-        ListNode<T>* getMiddle(ListNode<T>* node);
-        ListNode<T>* merge(ListNode<T>* left, ListNode<T>* right, bool ascending);
+        ListNode* mergeSort(ListNode* node, bool ascending);
+        ListNode* getMiddle(ListNode* node);
+        ListNode* merge(ListNode* left, ListNode* right, bool ascending);
         void updateTail();	
 
 	public:
@@ -122,7 +122,7 @@ void LinkedList<T>::deleteNode(int num)
 			delete nodePtr;
 		}
 	}
-};
+}
 
 template <typename T>
 void LinkedList<T>::displayList() const
@@ -142,7 +142,7 @@ void LinkedList<T>::displayList() const
 	}
 	else
 		cout << "\nThere are no nodes in the list.\n\n";
-};
+}
 
 template <typename T>
 LinkedList<T>::~LinkedList()
@@ -165,7 +165,7 @@ LinkedList<T>::~LinkedList()
 		// Position nodePtr at the next node.
 		nodePtr = nextNode;
 	}
-};
+}
 
 template <typename T>
 void LinkedList<T>::addPet(LinkedList<Pet>* list)
@@ -195,106 +195,95 @@ FinInfo NewObject = FinInfo(tempBal, tempPaid, temptip);
 Pet newPet(tempType, tempName, tempAge, NewObject);
 list->appendNode(newPet);
 
-};
+}
+
 template <typename T>
 void LinkedList<T>::sortAscend() 
 {
     head = mergeSort(head, true);  // Sort in ascending order
-    updateTail();
+    updateTail();  // Update tail after sorting
 }
 
 template <typename T>
 void LinkedList<T>::sortDescend() 
 {
     head = mergeSort(head, false);  // Sort in descending order
-    updateTail();
+    updateTail();  // Update tail after sorting
 }
 
 template <typename T>
-ListNode<T>* LinkedList<T>::mergeSort(ListNode<T>* node, bool ascending) 
+typename LinkedList<T>::ListNode* LinkedList<T>::mergeSort(ListNode* startNode, bool ascending) 
 {
-    if (!node || !node->getNextPtr()) 
-	{
-        return node;  // Base case: return if list is empty or has one node
+    // Base case: if list is empty or contains a single node
+    if (!startNode || !startNode->next) 
+        return startNode;
+    
+    // Split the list in half
+    ListNode* midNode = startNode;
+    ListNode* endNode = startNode->next;
+    
+    while (endNode && endNode->next) 
+    {
+        midNode = midNode->next;
+        endNode = endNode->next->next;
     }
     
-    // Split list into halves
-    ListNode<T>* mid = getMiddle(node);
-    ListNode<T>* rightHalf = mid->getNextPtr();
-    mid->setNextPtr(nullptr);  // Split the list
+    // Split the list into two halves
+    ListNode* rightHalfStart = midNode->next;
+    midNode->next = nullptr;
     
-    // Recursive sort on each half
-    ListNode<T>* leftSorted = mergeSort(node, ascending);
-    ListNode<T>* rightSorted = mergeSort(rightHalf, ascending);
+    // Recursively sort each half
+    ListNode* leftSorted = mergeSort(startNode, ascending);
+    ListNode* rightSorted = mergeSort(rightHalfStart, ascending);
     
-    // Merge sorted halves
+    // Merge the two sorted halves
     return merge(leftSorted, rightSorted, ascending);
 }
 
 template <typename T>
-ListNode<T>* LinkedList<T>::getMiddle(ListNode<T>* node) 
+typename LinkedList<T>::ListNode* LinkedList<T>::merge(ListNode* leftNode, ListNode* rightNode, bool ascending) 
 {
-    ListNode<T>* leftWalker = node;
-    ListNode<T>* rightWalker = node->getNextPtr();
+    ListNode tempHead(0);  // Temporary node to simplify merging
+    ListNode* mergedTail = &tempHead;
     
-    while (rightWalker && rightWalker->getNextPtr())
-	{
-        leftWalker = leftWalker->getNextPtr();
-        rightWalker = rightWalker->getNextPtr()->getNextPtr();
-    }
-    return leftWalker;
-}
-
-template <typename T>
-ListNode<T>* LinkedList<T>::merge(ListNode<T>* left, ListNode<T>* right, bool ascending)
- {
-    ListNode<T> tempHead;  // Temporary node to simplify the merging process
-    ListNode<T>* mergeTail = &tempHead;
-    
-    while (left && right) 
-	{
-        // Compare nodes based on ascending or descending order
-        if ((ascending && left->getData().age <= right->getData().age) ||
-            (!ascending && left->getData().age > right->getData().age))
-		{
-            mergeTail->setNextPtr(left);
-            left = left->getNextPtr();
+    while (leftNode && rightNode) 
+    {
+        // Choose node based on ascending or descending order
+        if ((ascending && leftNode->val.age <= rightNode->val.age) ||
+            (!ascending && leftNode->val.age > rightNode->val.age)) 
+        {
+            mergedTail->next = leftNode;
+            leftNode = leftNode->next;
+        } 
+        else 
+        {
+            mergedTail->next = rightNode;
+            rightNode = rightNode->next;
         }
-		else 
-		{
-            mergeTail->setNextPtr(right);
-            right = right->getNextPtr();
-        }
-        mergeTail = mergeTail->getNextPtr();
+        mergedTail = mergedTail->next;
     }
     
-    // Attach remaining nodes
-    if (left) 
-	{
-        mergeTail->setNextPtr(left);
-    } 
-	else 
-	{
-        mergeTail->setNextPtr(right);
-    }
+    // Attach any remaining nodes
+    mergedTail->next = leftNode ? leftNode : rightNode;
     
-    return tempHead.getNextPtr();  // Head of the merged list
+    return tempHead.next;  // Return the merged list head
 }
 
 template <typename T>
 void LinkedList<T>::updateTail()
 {
     if (!head) 
-	{
+    {
         tail = nullptr;
         return;
     }
     
-    ListNode<T>* node = head;
-    while (node->getNextPtr()) 
-	{
-        node = node->getNextPtr();
+    ListNode* currentNode = head;
+    while (currentNode->next) 
+    {
+        currentNode = currentNode->next;
     }
-    tail = node;
+    tail = currentNode;
 }
+
 #endif
