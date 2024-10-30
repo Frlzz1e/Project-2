@@ -33,7 +33,11 @@ class LinkedList
 		}; 
 
 		ListNode *head;	
-		ListNode *tail;		
+		ListNode *tail;	
+        ListNode<T>* mergeSort(ListNode<T>* node, bool ascending);
+        ListNode<T>* getMiddle(ListNode<T>* node);
+        ListNode<T>* merge(ListNode<T>* left, ListNode<T>* right, bool ascending);
+        void updateTail();	
 
 	public:
 		LinkedList()
@@ -47,6 +51,8 @@ class LinkedList
 		void deleteNode(int position);
 		void displayList() const;
         void addPet(LinkedList<Pet>* list);
+        void sortAscend();
+        void sortDescend();
 };
 
 //DEFINE ALL OTHER LinkedList class FUNCTIONS BELOW THIS LINE--------------------------------
