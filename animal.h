@@ -53,7 +53,6 @@ class Pet
 		int age;
 		FinInfo FinacialObject;
 		
-		
 	public:
 		//CONSTRUCTORS
 		Pet(){};
@@ -64,10 +63,12 @@ class Pet
 			this->age = a;
 			this->FinacialObject = f;
 		}
+		//Getter for age
+		int getAge() 
+		{ 
+			return age; 
+		}
 	
-
-
-
 //OVERLOADED << OPERATOR to display the pet with cout <<
 		friend ostream & operator << (ostream & os, Pet p)
 		{

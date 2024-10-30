@@ -231,12 +231,13 @@ ListNode<T>* LinkedList<T>::mergeSort(ListNode<T>* startNode, bool ascending)
 
 template <typename T>
 ListNode<T>* LinkedList<T>::merge(ListNode<T>* leftNode, ListNode<T>* rightNode, bool ascending) {
-    ListNode<T> tempHead(0);
+    Pet tempPet;  // Create a temporary Pet object
+    ListNode<T> tempHead(tempPet);
     ListNode<T>* mergedTail = &tempHead;
 
     while (leftNode && rightNode) {
-        if ((ascending && leftNode->val.age <= rightNode->val.age) ||
-            (!ascending && leftNode->val.age > rightNode->val.age)) 
+        if ((ascending && leftNode->val.getAge() <= rightNode->val.getAge()) ||
+            (!ascending && leftNode->val.getAge() > rightNode->val.getAge())) 
 		{
             mergedTail->next = leftNode;
             leftNode = leftNode->next;
