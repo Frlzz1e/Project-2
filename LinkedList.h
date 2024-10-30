@@ -2,7 +2,7 @@
 	Filename:       LinkedList.h - Class Specification File for 
 				    LinkedList Template Class
 	Date Created:   10/24/2024
-	Author:         Bernie Friesel and Nathan Lopp
+	Author:         Bernie Friesel and Nathan 
 	Purpose:        A Singly-Linked List implemented in a
 				    LinkedList template class that contains a ListNode
 				    structure variable
@@ -14,7 +14,6 @@
 #include "animal.h"
 #include <iostream>
 using namespace std;
-
 
 template <typename T>
 class LinkedList
