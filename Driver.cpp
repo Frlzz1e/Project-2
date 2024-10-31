@@ -140,6 +140,10 @@ int main(){
         case 3:
 
 
+            cout << "\n\nWhich pet would you like to update?\n\n";
+            list.displayList();
+            cin >> position;
+            list.editNode(position);
             break;
 
 
@@ -154,7 +158,14 @@ int main(){
             break;
 
         case 5:
+        cout << "\n\nWhich pet would you like to pay towards?\n\n";
+        list.displayList();
+        cout << endl;
+        cin >> position;
 
+        list.payBalance(position);
+
+        break;
         
         case 6:
              cout << "\n\nHave a great day and thank you for coming.";

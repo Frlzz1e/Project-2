@@ -63,11 +63,20 @@ class Pet
 			this->age = a;
 			this->FinacialObject = f;
 		}
+
+		void setFin(FinInfo givenFin);
+		void setType(string givenType);
+		void setName(string givenName);
+		void setAge(int givenAge);
+
+		FinInfo getObject();
+
 		//Getter for age
 		int getAge() 
 		{ 
 			return age; 
 		}
+
 	
 //OVERLOADED << OPERATOR to display the pet with cout <<
 		friend ostream & operator << (ostream & os, Pet p)

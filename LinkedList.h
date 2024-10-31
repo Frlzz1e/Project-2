@@ -26,6 +26,9 @@ struct ListNode
     	val = NV;
     	next = nullptr;
 	}
+
+	T getData() {return val;}
+	void setval(ListNode<T> object){val = object.getData();}
 };
 template <typename T>
 class LinkedList
@@ -51,6 +54,8 @@ class LinkedList
         void addPet(LinkedList<Pet>* list);
         void sortAscend();
         void sortDescend();
+		void editNode(int position);
+		void payBalance(int position);
 };
 
 //DEFINE ALL OTHER LinkedList class FUNCTIONS BELOW THIS LINE--------------------------------
@@ -276,6 +281,224 @@ void LinkedList<T>::updateTail()
         currentNode = currentNode->next;
 	}
     tail = currentNode;
+}
+
+template <typename T>
+void LinkedList<T>::editNode(int num){
+
+	FinInfo object;
+	Pet temp;
+	string tempType;
+	string tempName;
+	int tempAge;
+	double tempBal;
+	double tempPaid;
+	double temptip;
+	ListNode<T>* nodePtr;       // To traverse the list
+	ListNode<T>* previousNode;  // To point to the previous node
+    int i = 0;
+
+	// If the list is empty, do nothing.
+	if (!head)
+		return;
+
+	// Determine if the first node is the one.
+	if (num == 1)
+	{
+
+		nodePtr = head->next;
+		head = nodePtr;
+
+		cout << "Enter  the updated information about the animal."<<endl;
+		cout << "\tType: ";
+		cin >> tempType;
+		cout << "\n\tName: ";
+		cin >> tempName;
+		cout << "\n\tAge: ";
+		cin >> tempAge;
+		cout << "\n\tCurrent Balance: ";
+		cin>> tempBal;
+		cout << "\n\tAmount already Paid: ";
+		cin >> tempPaid;
+		cout << "\n\tTip: ";
+		cin >> temptip;
+
+		temp = nodePtr->getData();
+		temp.setType(tempType);
+		temp.setName(tempName);
+		temp.setAge(tempAge);
+
+		object = temp.getObject();
+		object.setbalance(tempBal);
+		object.setpaid(tempPaid);
+		object.settip(temptip);
+
+		temp.setFin(object);
+
+		appendNode(temp);
+
+
+	}
+	else
+	{
+		// Initialize nodePtr to head of list
+		nodePtr = head;
+
+		// Skip all nodes whose value member is 
+		// not equal to num.
+		while (nodePtr != NULL && i != num-1)
+		{  
+			previousNode = nodePtr;
+			nodePtr = nodePtr->next;
+            i++;
+		}
+
+		// If nodePtr is not at the end of the list, 
+		// link the previous node to the node after
+		// nodePtr, then delete nodePtr.
+		if (nodePtr)
+		{
+			if(nodePtr == tail)
+			{
+				tail = previousNode;
+			}
+			previousNode->next = nodePtr->next;
+			
+			cout << "Enter  the updated information about the animal."<<endl;
+			cout << "\tType: ";
+			cin >> tempType;
+			cout << "\n\tName: ";
+			cin >> tempName;
+			cout << "\n\tAge: ";
+			cin >> tempAge;
+			cout << "\n\tCurrent Balance: ";
+			cin>> tempBal;
+			cout << "\n\tAmount already Paid: ";
+			cin >> tempPaid;
+			cout << "\n\tTip: ";
+			cin >> temptip;
+
+			temp = nodePtr->getData();
+			temp.setType(tempType);
+			temp.setName(tempName);
+			temp.setAge(tempAge);
+
+			object = temp.getObject();
+			object.setbalance(tempBal);
+			object.setpaid(tempPaid);
+			object.settip(temptip);
+
+			temp.setFin(object);
+
+			appendNode(temp);
+
+		}
+	}
+}
+
+template <typename T>
+void LinkedList<T>::payBalance(int num){
+
+	FinInfo object;
+	Pet temp;
+	string tempType;
+	string tempName;
+	int tempAge;
+	double newBal;
+	double amountPaid;
+	double tempBal;
+	double tempPaid;
+	double temptip;
+	ListNode<T>* nodePtr;       // To traverse the list
+	ListNode<T>* previousNode;  // To point to the previous node
+    int i = 0;
+
+	// If the list is empty, do nothing.
+	if (!head)
+		return;
+
+	// Determine if the first node is the one.
+	if (num == 1)
+	{
+
+		nodePtr = head->next;
+		head = nodePtr;
+
+		cout << "Enter the amount you want to pay."<<endl;
+		cin >> amountPaid;
+
+		temp = nodePtr->getData();
+		object = temp.getObject();
+		tempBal = object.getbalance();
+		newBal = tempBal-amountPaid;
+
+		object.setbalance(newBal);
+		object.setpaid(amountPaid);
+		//object.settip(temptip);
+
+		temp.setFin(object);
+
+		appendNode(temp);
+
+
+	}
+	else
+	{
+		// Initialize nodePtr to head of list
+		nodePtr = head;
+
+		// Skip all nodes whose value member is 
+		// not equal to num.
+		while (nodePtr != NULL && i != num-1)
+		{  
+			previousNode = nodePtr;
+			nodePtr = nodePtr->next;
+            i++;
+		}
+
+		// If nodePtr is not at the end of the list, 
+		// link the previous node to the node after
+		// nodePtr, then delete nodePtr.
+		if (nodePtr)
+		{
+			if(nodePtr == tail)
+			{
+				tail = previousNode;
+			}
+			previousNode->next = nodePtr->next;
+			
+			cout << "Enter  the updated information about the animal."<<endl;
+			cout << "\tType: ";
+			cin >> tempType;
+			cout << "\n\tName: ";
+			cin >> tempName;
+			cout << "\n\tAge: ";
+			cin >> tempAge;
+			cout << "\n\tCurrent Balance: ";
+			cin>> tempBal;
+			cout << "\n\tAmount already Paid: ";
+			cin >> tempPaid;
+			cout << "\n\tTip: ";
+			cin >> temptip;
+
+			temp = nodePtr->getData();
+			temp.setType(tempType);
+			temp.setName(tempName);
+			temp.setAge(tempAge);
+
+			object = temp.getObject();
+			object.setbalance(tempBal);
+			object.setpaid(tempPaid);
+			object.settip(temptip);
+
+			temp.setFin(object);
+
+			appendNode(temp);
+
+		}
+	}
+
+
 }
 
 #endif
