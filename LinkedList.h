@@ -34,32 +34,11 @@ template <typename T>
 class LinkedList
 {
 	private:
-<<<<<<< Updated upstream
 		ListNode<T>* head;	
 		ListNode<T>* tail;	
         ListNode<T>* mergeSort(ListNode<T>* startNode, bool ascending);
         ListNode<T>* merge(ListNode<T>* leftNode, ListNode<T>* rightNode, bool ascending);
         void updateTail();	
-=======
-		struct ListNode
-		{
-			//STRUCTURE MEMBERS NEED TO BE ADDED HERE
-			T val;
-			ListNode *next;
-
-            ListNode(T NV){
-                this->val = NV;
-                this->next = NULL;
-            }
-		}; 
-
-		ListNode *head;	
-		ListNode *tail;		
-        ListNode<T>* mergeSort(ListNode<T>* node, bool ascending);
-        ListNode<T>* getMiddle(ListNode<T>* node);
-        ListNode<T>* merge(ListNode<T>* left, ListNode<T>* right, bool ascending);
-        void updateTail();
->>>>>>> Stashed changes
 
 	public:
 		LinkedList()
