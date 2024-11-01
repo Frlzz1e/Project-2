@@ -127,6 +127,7 @@ int main(){
             }
             break;
         case 2:
+
             list.addPet(&list);
             cout << "Thank you for adding your new pet." << endl << endl;
             cout << "Here is the new list of pets in our kennel:" <<endl;
@@ -140,15 +141,14 @@ int main(){
             list.displayList();
             cin >> position;
             list.editNode(position);
-            break;
 
+            break;
 
         case 4:
             cout << "\n\nWhich pet would you like to delete?\n\n";
             list.displayList();
             cout << endl;
             cin >> position;
-
             list.deleteNode(position);
 
             break;
