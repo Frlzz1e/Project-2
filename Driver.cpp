@@ -18,7 +18,6 @@ int main(){
     int choice;
     int position;
     int menuChoice, sortChoice;
-    int randomDescription = (rand() % 3) + 1;
 
 //ADD SOME animals
 	cout << "\n\nLoading pets into linked list...";
@@ -47,11 +46,10 @@ int main(){
         cout << "2. Add a Pet to the Kennel" << endl;
         cout << "3. Update Pet Info" << endl;
         cout << "4. Remove a pet" << endl;
-        cout << "5. Pay balance" << endl;
-        cout << "6. Leave the Clinc" << endl;
+        cout << "5. Leave the Clinc" << endl;
         cin >> menuChoice;
 
-        while (menuChoice < 1 || menuChoice > 6 || cin.fail())
+        while (menuChoice < 1 || menuChoice > 5 || cin.fail())
         {
             if (cin.fail())
             {
@@ -64,8 +62,7 @@ int main(){
                 cout << "2. Add a Pet to the Kennel" << endl;
                 cout << "3. Update Pet Info" << endl;
                 cout << "4. Remove a pet" << endl;
-                cout << "5. Pay balance" << endl;
-                cout << "6. Leave the Clinc" << endl;
+                cout << "5. Leave the Clinc" << endl;
                 cin >> menuChoice;
             }
             else
@@ -76,8 +73,7 @@ int main(){
                 cout << "2. Add a Pet to the Kennel" << endl;
                 cout << "3. Update Pet Info" << endl;
                 cout << "4. Remove a pet" << endl;
-                cout << "5. Pay balance" << endl;
-                cout << "6. Leave the Clinc" << endl;
+                cout << "5. Leave the Clinc" << endl;
                 cin >> menuChoice;
             }
         }
@@ -156,18 +152,8 @@ int main(){
             list.deleteNode(position);
 
             break;
-
-        case 5:
-        cout << "\n\nWhich pet would you like to pay towards?\n\n";
-        list.displayList();
-        cout << endl;
-        cin >> position;
-
-        list.payBalance(position);
-
-        break;
         
-        case 6:
+        case 5:
              cout << "\n\nHave a great day and thank you for coming.";
 
              return 0;
