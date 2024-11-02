@@ -161,4 +161,7 @@ int main(){
             
     } while (menuChoice != 5);
 
+
+list.~LinkedList(); 
+
 };
