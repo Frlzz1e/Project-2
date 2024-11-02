@@ -1,0 +1,63 @@
+TEST CASES FOR LinkedList AND Pet CLASSES
+
+1. Empty List Operations
+   - Actions:
+     - Call displayList() on an empty list.
+     - Call deleteNode(1) on an empty list.
+     - Call editNode(1) on an empty list.
+   - Expected Result: 
+     - displayList() should print a message indicating the list is empty.
+     - deleteNode(1) should handle gracefully with no error.
+     - editNode(1) should handle gracefully with no error.
+
+2. Adding Nodes
+   - Actions:
+     - Append multiple Pet objects to the list.
+     - Display the list after each addition.
+   - Expected Result: 
+     - Each appendNode() call should add a Pet to the end of the list.
+     - `displayList()` should show all added pets in order.
+
+3. Removing Nodes (from start, middle, end)
+   - Actions:
+     - Remove the first node.
+     - Remove a middle node.
+     - Remove the last node.
+   - Expected Result:
+     - First node removal updates head correctly.
+     - Middle node removal links previous node to the next node.
+     - Last node removal updates the tail pointer correctly.
+
+4. Editing Nodes
+   - Actions:
+     - Edit the first node’s data.
+     - Edit a middle node’s data.
+     - Edit the last node’s data.
+   - Expected Result:
+     - Updated information for each node should be reflected when displayed.
+
+5. Sorting Nodes (Ascending and Descending)
+   - Actions:
+     - Sort list in ascending order.
+     - Display list.
+     - Sort list in descending order.
+     - Display list.
+   - Expected Result:
+     - Ascending sort should arrange pets from youngest to oldest.
+     - Descending sort should arrange pets from oldest to youngest.
+
+6. Edge Cases for Out of Range Calls
+   - Actions:
+     - Call deleteNode(-1), deleteNode(1000) on a non-empty list.
+     - Call editNode(-1), editNode(1000) on a non-empty list.
+   - Expected Result:
+     - Both methods handle out-of-range indices without errors.
+
+7. Edge Cases: Adding, Emptying, and Displaying List
+   - Actions:
+     - Add multiple Pet objects.
+     - Remove each node one by one until the list is empty.
+     - Call displayList() after each removal.
+   - Expected Result:
+     - The list should successfully remove each node.
+     - displayList() should show no nodes after the list is emptied.

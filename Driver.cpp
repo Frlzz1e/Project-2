@@ -154,7 +154,7 @@ int main(){
             break;
         
         case 5:
-             cout << "\n\nHave a great day and thank you for coming.";
+             cout << "\n\nHave a great day and thank you for coming!";
 
              return 0;
         }

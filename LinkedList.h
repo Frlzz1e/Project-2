@@ -103,9 +103,12 @@ void LinkedList<T>::deleteNode(int num)
 	ListNode<T>* nodePtr;       // To traverse the list
 	ListNode<T>* previousNode;  // To point to the previous node
     int i = 0;
-	// If the list is empty, do nothing.
-	if (!head)
+
+	if (num < 1 || !head) //Ensure num is positive and list is not empty
+	{
+		cout << "Invalid Choice.\n";
 		return;
+	}
 
 	// Determine if the first node is the one.
 	if (num == 1)
@@ -140,6 +143,10 @@ void LinkedList<T>::deleteNode(int num)
 			previousNode->next = nodePtr->next;
 			delete nodePtr;
 		}
+		else
+        {
+            cout << "Position exceeds list length.\n";
+        }
 	}
 }
 
@@ -152,7 +159,12 @@ void LinkedList<T>::displayList() const
 {
 	ListNode<T>* nodePtr;
 
-	if(head != NULL)
+	if (!head)
+    {
+        cout << "The list is empty.\n";
+        return;
+    }
+	else
 	{
 		// Position nodePtr at the head of the list.
 		nodePtr = head;
@@ -163,8 +175,6 @@ void LinkedList<T>::displayList() const
 			nodePtr = nodePtr->next;
 		}
 	}
-	else
-		cout << "\nThere are no nodes in the list.\n\n";
 }
 
 /*********************************************************** 
@@ -360,7 +370,13 @@ Purpose: Alowys the user to edit a Pet's information within
 the Linked List.
 ***********************************************************/
 template <typename T>
-void LinkedList<T>::editNode(int num){
+void LinkedList<T>::editNode(int num)
+{
+	if (num < 1 || !head) //Ensure num is positive and list is not empty
+	{
+		cout << "Invalid Choice.\n";
+		return;
+	}
 
 	FinInfo object;
 	Pet temp;			//Temporary Values
@@ -374,9 +390,19 @@ void LinkedList<T>::editNode(int num){
 	ListNode<T>* previousNode;  // To point to the previous node
     int i = 0;
 
-	// If the list is empty, do nothing.
-	if (!head)
-		return;
+	//Traverse to the node at position num
+    for (int i = 1; i < num && nodePtr; i++) 
+	{
+        previousNode = nodePtr;
+        nodePtr = nodePtr->next;
+    }
+
+    // Check if the node to edit exists
+    if (!nodePtr) 
+	{
+        cout << "Node at position " << num << " does not exist.\n";
+        return;
+    }
 
 	// Determine if the first node is the one.
 	if (num == 1)
@@ -408,9 +434,23 @@ void LinkedList<T>::editNode(int num){
 		object.setbalance(tempBal);
 		object.setpaid(tempPaid);
 		object.settip(temptip);
-
 		temp.setFin(object);
 
+		// Delete the old node and append the new one
+    	if (previousNode) 
+		{
+			previousNode->next = nodePtr->next;
+		}
+    	else 
+		{
+			head = nodePtr->next;
+		}
+    	if (nodePtr == tail) 
+		{
+			tail = previousNode;
+		}
+
+		delete nodePtr; // Free memory before appending
 		appendNode(temp);
 
 
