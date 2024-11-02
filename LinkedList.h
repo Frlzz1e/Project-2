@@ -388,21 +388,14 @@ void LinkedList<T>::editNode(int num)
 	double temptip;
 	ListNode<T>* nodePtr;       // To traverse the list
 	ListNode<T>* previousNode;  // To point to the previous node
-    int i = 0;
+	int i = 0;
 
-	//Traverse to the node at position num
-    for (int i = 1; i < num && nodePtr; i++) 
+	// Check if the node to edit exists
+	if (!nodePtr) 
 	{
-        previousNode = nodePtr;
-        nodePtr = nodePtr->next;
-    }
-
-    // Check if the node to edit exists
-    if (!nodePtr) 
-	{
-        cout << "Node at position " << num << " does not exist.\n";
-        return;
-    }
+		cout << "Node at position " << num << " does not exist.\n";
+		return;
+	}
 
 	// Determine if the first node is the one.
 	if (num == 1)
@@ -436,19 +429,6 @@ void LinkedList<T>::editNode(int num)
 		object.settip(temptip);
 		temp.setFin(object);
 
-		// Delete the old node and append the new one
-    	if (previousNode) 
-		{
-			previousNode->next = nodePtr->next;
-		}
-    	else 
-		{
-			head = nodePtr->next;
-		}
-    	if (nodePtr == tail) 
-		{
-			tail = previousNode;
-		}
 
 		delete nodePtr; // Free memory before appending
 		appendNode(temp);
@@ -466,7 +446,7 @@ void LinkedList<T>::editNode(int num)
 		{  
 			previousNode = nodePtr;
 			nodePtr = nodePtr->next;
-            i++;
+			i++;
 		}
 
 		// If nodePtr is not at the end of the list, 
@@ -511,5 +491,4 @@ void LinkedList<T>::editNode(int num)
 		}
 	}
 }
-
 #endif
