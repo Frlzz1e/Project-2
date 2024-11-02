@@ -41,6 +41,7 @@ int main(){
 
     do
     {
+        //Menu options
         cout << "\n\nWelcome to our Veterinary Office! What would you like to do today?" << endl;
         cout << "1. View the Pets in the Kennel" << endl;
         cout << "2. Add a Pet to the Kennel" << endl;
@@ -80,6 +81,7 @@ int main(){
         switch (menuChoice)
         {
         case 1:
+            //Viewing pets in clinic
         	cout << "\n\nHow would you like to view the list?" << endl;
             cout << "1. Unsorted" << endl;
             cout << "2. Sorted by ascending age" << endl;
@@ -128,6 +130,8 @@ int main(){
             break;
         case 2:
 
+            //add a new pet
+
             list.addPet(&list);
             cout << "Thank you for adding your new pet." << endl << endl;
             cout << "Here is the new list of pets in our kennel:" <<endl;
@@ -136,7 +140,7 @@ int main(){
             break;
         case 3:
 
-
+            //updating pet
             cout << "\n\nWhich pet would you like to update?\n\n";
             list.displayList();
             cin >> position;
@@ -145,6 +149,7 @@ int main(){
             break;
 
         case 4:
+            //deleting a pet
             cout << "\n\nWhich pet would you like to delete?\n\n";
             list.displayList();
             cout << endl;
@@ -154,6 +159,7 @@ int main(){
             break;
         
         case 5:
+            //leaving the menu
              cout << "\n\nHave a great day and thank you for coming!";
 
              return 0;
