@@ -390,13 +390,6 @@ void LinkedList<T>::editNode(int num)
 	ListNode<T>* previousNode;  // To point to the previous node
     int i = 0;
 
-	//Traverse to the node at position num
-    for (int i = 1; i < num && nodePtr; i++) 
-	{
-        previousNode = nodePtr;
-        nodePtr = nodePtr->next;
-    }
-
     // Check if the node to edit exists
     if (!nodePtr) 
 	{
@@ -436,19 +429,6 @@ void LinkedList<T>::editNode(int num)
 		object.settip(temptip);
 		temp.setFin(object);
 
-		// Delete the old node and append the new one
-    	if (previousNode) 
-		{
-			previousNode->next = nodePtr->next;
-		}
-    	else 
-		{
-			head = nodePtr->next;
-		}
-    	if (nodePtr == tail) 
-		{
-			tail = previousNode;
-		}
 
 		delete nodePtr; // Free memory before appending
 		appendNode(temp);
